@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOTION | High-End Motion Graphics Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">MOTION<span>.</span></div>
+        <ul class="filters">
+            <li class="filter-item active" data-filter="all">All</li>
+            <li class="filter-item" data-filter="3d">3D Loops</li>
+            <li class="filter-item" data-filter="abstract">Abstract</li>
+            <li class="filter-item" data-filter="ui">UI Motion</li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1 class="hero-title">Visualizing <span class="accent-text">Momentum</span></h1>
+        <p class="hero-subtitle">A collection of premium motion loops and digital artifacts designed for the next generation of interfaces.</p>
+    </header>
+
+    <!-- Portfolio Grid -->
+    <main class="container">
+        <div class="portfolio-grid">
+            <!-- Item 1 -->
+            <div class="portfolio-card" data-category="3d">
+                <div class="card-inner" onclick="openLightbox(this)">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXpueGZ4bmM3NjV5Nzh6ZTNueWszZzFmYmd6cnR5eXRxbmN3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKMGpxxidmvv0Ak/giphy.gif" alt="3D Abstract Loop">
+                    <div class="card-overlay">
+                        <h3>Cyber Sphere</h3>
+                        <p>3D Animation</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="portfolio-card" data-category="abstract">
+                <div class="card-inner" onclick="openLightbox(this)">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2ZkbW5pbmZ6bmZ5bmZ5bmZ5bmZ5bmZ5bmZ5bmZ5bmZ5bmZ5bmZ5JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l41lTjJp9pXj6yE0M/giphy.gif" alt="Geometric Waves">
+                    <div class="card-overlay">
+                        <h3>Prism Flow</h3>
+                        <p>Abstract Geometry</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="portfolio-card" data-category="ui">
+                <div class="card-inner" onclick="openLightbox(this)">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXpueGZ4bmM3NjV5Nzh6ZTNueWszZzFmYmd6cnR5eXRxbmN3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l378cU62rA8OOGWvm/giphy.gif" alt="UI Dashboard Animation">
+                    <div class="card-overlay">
+                        <h3>Interface Core</h3>
+                        <p>UI Motion</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="portfolio-card" data-category="3d">
+                <div class="card-inner" onclick="openLightbox(this)">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXpueGZ4bmM3NjV5Nzh6ZTNueWszZzFmYmd6cnR5eXRxbmN3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/uS3P710zIq6T9x0DVs/giphy.gif" alt="Neon Rocks">
+                    <div class="card-overlay">
+                        <h3>Neon Terrain</h3>
+                        <p>Landscape Loop</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="portfolio-card" data-category="abstract">
+                <div class="card-inner" onclick="openLightbox(this)">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXpueGZ4bmM3NjV5Nzh6ZTNueWszZzFmYmd6cnR5eXRxbmN3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgN86BInYf5vG/giphy.gif" alt="Fluid Dynamics">
+                    <div class="card-overlay">
+                        <h3>Ether Flow</h3>
+                        <p>Liquid Simulation</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="portfolio-card" data-category="3d">
+                <div class="card-inner" onclick="openLightbox(this)">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXpueGZ4bmM3NjV5Nzh6ZTNueWszZzFmYmd6cnR5eXRxbmN3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKVUn7iM8FMEU24/giphy.gif" alt="Retro Grid">
+                    <div class="card-overlay">
+                        <h3>Retro Synth</h3>
+                        <p>80s Vibe</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+        <img id="lightbox-img" src="" alt="Full Screen Preview">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
