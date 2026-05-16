@@ -3,36 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REALNEWSK | High-End Motion Graphics Portfolio</title>
+    <title>REALNEWSK | Portfolio</title>
+    
+    <!-- Modern Sans-Serif Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        :root {
+            --bg-color: #0B0B0F;
+            --card-bg: #14141A;
+            --accent-color: #00F3FF; /* Electric Blue */
+            --text-primary: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --nav-height: 80px;
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Admin Automation Bar --- */
+        #admin-bar {
+            display: none;
+            position: fixed;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+            background: #14141A;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--accent-color);
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        #auto-input {
+            width: 100%;
+            background: #000;
+            border: 1px solid #333;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            height: var(--nav-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(11, 11, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--accent-color); }
+
+        .filters {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .filter-item {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .filter-item:hover, .filter-item.active {
+            color: var(--accent-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            margin-top: calc(var(--nav-height) + 4rem);
+            padding: 0 5%;
+            text-align: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .accent-text {
+            color: var(--accent-color);
+            text-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+        }
+
+        .hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        /* --- Portfolio Grid --- */
+        .container { padding: 0 5% 5rem 5%; }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-card {
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            animation: slideIn 0.5s ease backwards;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        /* --- Hover Effects --- */
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .portfolio-card:hover img { transform: scale(1.1); }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .portfolio-card:hover .card-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Lightbox --- */
+        .lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .lightbox img { max-width: 90%; max-height: 80vh; border-radius: 8px; }
+
+        .close-btn {
+            position: absolute;
+            top: 20px; right: 30px;
+            font-size: 3rem; color: white; cursor: pointer;
+        }
+
+        /* --- Mobile --- */
+        @media (max-width: 768px) {
+            .filters { display: none; }
+            .hero-title { font-size: 2.5rem; }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Automation Input (Press 'A' to see) -->
+    <div id="admin-bar">
+        <input type="text" id="auto-input" placeholder="Paste: Link Title #Tag1 #Tag2 and hit Enter">
+        <p style="font-size: 11px; color: #8E8E93; margin-top: 10px;">Example: https://giphy.com/gif.gif My Title #slovakia #kosice</p>
+    </div>
 
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">REALNEWSK<span>.</span></div>
         <ul class="filters">
             <li class="filter-item active" data-filter="all">All</li>
-            <li class="filter-item" data-filter="3d">Slovakia</li>
-            <li class="filter-item" data-filter="abstract">Košice</li>
-            <li class="filter-item" data-filter="ui">Others</li>
+            <li class="filter-item" data-filter="slovakia">Slovakia</li>
+            <li class="filter-item" data-filter="kosice">Košice</li>
+            <li class="filter-item" data-filter="others">Others</li>
         </ul>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <header class="hero">
         <h1 class="hero-title">My Hobby <span class="accent-text">Portfolio</span></h1>
-        <p class="hero-subtitle">A collection of Slovak nationalist GIFs.</p>
+        <p class="hero-subtitle">A collection of Slovak motion graphics and GIFs. Press 'A' to add new items.</p>
     </header>
 
-    <!-- Portfolio Grid -->
+    <!-- Grid -->
     <main class="container">
-        <div class="portfolio-grid">
-            <!-- Item 1 -->
-            <div class="portfolio-card" data-category="3d">
+        <div class="portfolio-grid" id="main-grid">
+            
+            <!-- Default Item 1 -->
+            <div class="portfolio-card" data-category="slovakia">
                 <div class="card-inner" onclick="openLightbox(this)">
                     <img src="https://media.giphy.com/media/QfLptdB96eDbjCIVVF/giphy.gif" alt="Slovakia">
                     <div class="card-overlay">
@@ -42,69 +271,117 @@
                 </div>
             </div>
 
-            <!-- Item 2 -->
-            <div class="portfolio-card" data-category="Košice">
+            <!-- Default Item 2 -->
+            <div class="portfolio-card" data-category="kosice">
                 <div class="card-inner" onclick="openLightbox(this)">
-                    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExenJseGxhMTZuM3Y5MmVqOHloc3I5b2hidm00cnBoancxeDVxcmtidyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CKR3gjmoOYE1zpFvcP/giphy.gif" alt="Košic">
+                    <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExenJseGxhMTZuM3Y5MmVqOHloc3I5b2hidm00cnBoancxeDVxcmtidyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CKR3gjmoOYE1zpFvcP/giphy.gif" alt="Košice">
                     <div class="card-overlay">
-                        <h3>LunikIX</h3>
+                        <h3>Lunik IX</h3>
                         <p>Košice</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Item 3 -->
-            <div class="portfolio-card" data-category="ui">
-                <div class="card-inner" onclick="openLightbox(this)">
-                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXpueGZ4bmM3NjV5Nzh6ZTNueWszZzFmYmd6cnR5eXRxbmN3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l378cU62rA8OOGWvm/giphy.gif" alt="UI Dashboard Animation">
-                    <div class="card-overlay">
-                        <h3>Interface Core</h3>
-                        <p>UI Motion</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item 4 -->
-            <div class="portfolio-card" data-category="3d">
-                <div class="card-inner" onclick="openLightbox(this)">
-                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXpueGZ4bmM3NjV5Nzh6ZTNueWszZzFmYmd6cnR5eXRxbmN3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/uS3P710zIq6T9x0DVs/giphy.gif" alt="Neon Rocks">
-                    <div class="card-overlay">
-                        <h3>Neon Terrain</h3>
-                        <p>Landscape Loop</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item 5 -->
-            <div class="portfolio-card" data-category="abstract">
-                <div class="card-inner" onclick="openLightbox(this)">
-                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXpueGZ4bmM3NjV5Nzh6ZTNueWszZzFmYmd6cnR5eXRxbmN3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT9IgN86BInYf5vG/giphy.gif" alt="Fluid Dynamics">
-                    <div class="card-overlay">
-                        <h3>Ether Flow</h3>
-                        <p>Liquid Simulation</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item 6 -->
-            <div class="portfolio-card" data-category="3d">
-                <div class="card-inner" onclick="openLightbox(this)">
-                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndXpueGZ4bmM3NjV5Nzh6ZTNueWszZzFmYmd6cnR5eXRxbmN3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKVUn7iM8FMEU24/giphy.gif" alt="Retro Grid">
-                    <div class="card-overlay">
-                        <h3>Retro Synth</h3>
-                        <p>80s Vibe</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 
-    <!-- Lightbox Modal -->
+    <!-- Lightbox -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
         <span class="close-btn">&times;</span>
-        <img id="lightbox-img" src="" alt="Full Screen Preview">
+        <img id="lightbox-img" src="">
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // --- AUTOMATION LOGIC ---
+        const adminBar = document.getElementById('admin-bar');
+        const autoInput = document.getElementById('auto-input');
+        const grid = document.getElementById('main-grid');
+
+        // 1. Show/Hide Admin Bar with "A" key
+        document.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'a' && e.target.tagName !== 'INPUT') {
+                adminBar.style.display = (adminBar.style.display === 'block') ? 'none' : 'block';
+                if(adminBar.style.display === 'block') autoInput.focus();
+            }
+        });
+
+        // 2. Process Input when Enter is pressed
+        autoInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const val = this.value;
+                if (!val) return;
+
+                // Extract URL
+                const urlMatch = val.match(/\bhttps?:\/\/\S+/gi);
+                const url = urlMatch ? urlMatch[0] : "";
+
+                // Extract first two hashtags as categories
+                const tags = val.match(/#(\w+)/g) || [];
+                const cat1 = tags[0] ? tags[0].replace('#', '').toLowerCase() : "others";
+                const cat2 = tags[1] ? tags[1].replace('#', '').toLowerCase() : "";
+
+                // Extract Title (everything that isn't a URL or a Tag)
+                let title = val.replace(url, '').replace(/#(\w+)/g, '').trim();
+                if (!title) title = "New Creation";
+
+                if (url) {
+                    createNewCard(url, title, cat1, cat2);
+                    this.value = ""; // Clear input
+                    adminBar.style.display = 'none'; // Hide bar
+                }
+            }
+        });
+
+        function createNewCard(url, title, category, label) {
+            const card = document.createElement('div');
+            card.className = 'portfolio-card';
+            card.setAttribute('data-category', category);
+            
+            card.innerHTML = `
+                <div class="card-inner" onclick="openLightbox(this)">
+                    <img src="${url}" alt="${title}">
+                    <div class="card-overlay">
+                        <h3>${title}</h3>
+                        <p>${label || category}</p>
+                    </div>
+                </div>
+            `;
+            grid.prepend(card); // Add to top of list
+        }
+
+        // --- FILTER LOGIC ---
+        document.querySelector('.filters').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-item')) {
+                const filterValue = e.target.getAttribute('data-filter');
+                
+                document.querySelectorAll('.filter-item').forEach(li => li.classList.remove('active'));
+                e.target.classList.add('active');
+
+                document.querySelectorAll('.portfolio-card').forEach(card => {
+                    const cardCat = card.getAttribute('data-category');
+                    if (filterValue === 'all' || cardCat === filterValue) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        });
+
+        // --- LIGHTBOX LOGIC ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(element) {
+            lightboxImg.src = element.querySelector('img').src;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
 </body>
 </html>
